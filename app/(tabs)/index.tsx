@@ -26,7 +26,7 @@ export default function HomeScreen() {
       <ThemedView style={styles.headerSection}>
         <ThemedView style={styles.logoContainer}>
           <Image
-            source={require('@/assets/images/zenlife-logo.jpeg')}
+            source={require('@/assets/images/zenlife-logo.png')}
             style={styles.logo}
           />
           <ThemedText style={styles.appName}>ZENLIFE</ThemedText>
@@ -34,8 +34,8 @@ export default function HomeScreen() {
         
         <ThemedView style={styles.header}>
           <ThemedView>
-            <ThemedText style={[styles.greeting, { backgroundColor: 'transparent' }]}>¡Bienvenido de nuevo!</ThemedText>
-            <ThemedText style={[styles.welcomeText, { backgroundColor: 'transparent' }]}>¿Cómo te sientes hoy?</ThemedText>
+            <ThemedText style={[styles.greeting, ]}>¡Bienvenido de nuevo!</ThemedText>
+            <ThemedText style={[styles.welcomeText, ]}>¿Cómo te sientes hoy?</ThemedText>
           </ThemedView>
          {/* <Image
             source={require('@/assets/images/profile-placeholder.png')}
@@ -114,14 +114,14 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   logo: {
-    width: 40,
-    height: 40,
+    width: 60,
+    height: 60,
     marginRight: 8,
   },
   appName: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#000000',
+    color: '#1e9d55',
     letterSpacing: 1,
     backgroundColor:'transparent',
   },
@@ -134,12 +134,13 @@ const styles = StyleSheet.create({
   greeting: {
     fontSize: 28,
     fontWeight: 'bold',
+    color: '#000000',
    
     backgroundColor: 'transparent', // Fondo transparente
   },
   welcomeText: {
     fontSize: 16,
-    
+    color: '#000000',
     backgroundColor: 'transparent', // Fondo transparente
   },
   profilePic: {
@@ -170,7 +171,11 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   moodEmoji: {
-    fontSize: 30,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 1,
+    fontSize: 22,
   },
   widgetContainer: {
     margin: 16,
@@ -201,8 +206,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   actionIcon: {
-    fontSize: 32,
-    marginBottom: 8,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    fontSize: 28,
+    marginBottom: 2,
   },
   actionTitle: {
     fontSize: 16,
@@ -223,13 +232,15 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   resourceIcon: {
+
     backgroundColor: 'white',
     padding: 12,
     borderRadius: 12,
     marginRight: 12,
   },
   resourceEmoji: {
-    fontSize: 24,
+    fontSize: 20,
+    
   },
   resourceInfo: {
     flex: 1,
