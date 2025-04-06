@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8f9fa',
   },
   headerSection: {
-    backgroundColor: '#0F8B461A',
+    backgroundColor: 'rgba(26, 171, 92, 0.1)',
     padding: 20,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#000000',
     letterSpacing: 1,
+    backgroundColor:'transparent',
   },
   header: {
     flexDirection: 'row',
