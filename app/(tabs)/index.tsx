@@ -172,6 +172,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   actionIcon: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
     fontSize: 28,
     marginBottom: 2,
   },
