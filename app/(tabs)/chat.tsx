@@ -24,12 +24,7 @@ export default function ChatScreen() {
         El chat y los recursos proporcionados son <ThemedText style={styles.boldText}>solo para información y apoyo general.</ThemedText> Si estás experimentando una crisis de salud mental o necesitas ayuda profesional, contacta a un profesional de salud mental calificado o servicios de emergencia.
       </ThemedText>
 
-      {/* Emergency Section */}
-      <ThemedView style={styles.emergencyBox}>
-        <ThemedText style={styles.emergencyText}>
-          ⚠ <ThemedText style={styles.emergencyTitle}>En caso de emergencia:</ThemedText> Llama al 988 - Línea Nacional de Prevención del Suicidio
-        </ThemedText>
-      </ThemedView>
+     
 
       {/* Continue Button */}
       <Pressable style={styles.continueButton}>
