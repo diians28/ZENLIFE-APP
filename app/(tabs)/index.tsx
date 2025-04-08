@@ -15,11 +15,6 @@ export default function HomeScreen() {
     { title: "Respiración", icon: "🫁", duration: "3 min" },
   ];
 
-  const resources = [
-    { type: "Podcast", title: "Mindfulness diario", duration: "15 min", icon: "🎧" },
-    { type: "Video", title: "Ejercicios de calma", duration: "8 min", icon: "🎥" },
-  ];
-
   return (
     <ScrollView style={styles.container}>
       {/* Header Section */}
@@ -34,13 +29,9 @@ export default function HomeScreen() {
         
         <ThemedView style={styles.header}>
           <ThemedView>
-            <ThemedText style={[styles.greeting, ]}>¡Bienvenido de nuevo!</ThemedText>
-            <ThemedText style={[styles.welcomeText, ]}>¿Cómo te sientes hoy?</ThemedText>
+            <ThemedText style={[styles.greeting]}>¡Bienvenido de nuevo!</ThemedText>
+            <ThemedText style={[styles.welcomeText]}>¿Cómo te sientes hoy?</ThemedText>
           </ThemedView>
-         {/* <Image
-            source={require('@/assets/images/profile-placeholder.png')}
-            style={styles.profilePic}
-          />*/}
         </ThemedView>
 
         <ThemedView style={styles.moodContainer}>
@@ -64,23 +55,6 @@ export default function HomeScreen() {
             </Pressable>
           ))}
         </ThemedView>
-      </ThemedView>
-
-      {/* Resources Section */}
-      <ThemedView style={styles.widgetContainer}>
-        <ThemedText style={styles.widgetTitle}>Recursos</ThemedText>
-        {resources.map((resource, index) => (
-          <Pressable key={index} style={styles.resourceCard}>
-            <ThemedView style={styles.resourceIcon}>
-              <ThemedText style={styles.resourceEmoji}>{resource.icon}</ThemedText>
-            </ThemedView>
-            <ThemedView style={styles.resourceInfo}>
-              <ThemedText style={styles.resourceType}>{resource.type}</ThemedText>
-              <ThemedText style={styles.resourceTitle}>{resource.title}</ThemedText>
-              <ThemedText style={styles.resourceDuration}>{resource.duration}</ThemedText>
-            </ThemedView>
-          </Pressable>
-        ))}
       </ThemedView>
 
       {/* Crisis Help */}
@@ -123,7 +97,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#1e9d55',
     letterSpacing: 1,
-    backgroundColor:'transparent',
+    backgroundColor: 'transparent',
   },
   header: {
     flexDirection: 'row',
@@ -132,41 +106,31 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   greeting: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingVertical: 10,
     fontSize: 28,
     fontWeight: 'bold',
     color: '#000000',
-   
-    backgroundColor: 'transparent', // Fondo transparente
+    backgroundColor: 'transparent',
   },
   welcomeText: {
     fontSize: 16,
     color: '#000000',
-    backgroundColor: 'transparent', // Fondo transparente
-  },
-  profilePic: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
   },
   moodContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     paddingVertical: 10,
-    backgroundColor: '#1e9d55', // Fondo verde
-    borderRadius: 20, // Opcional: redondear bordes
-    marginHorizontal: 16, // Opcional: agregar margen lateral
-    padding: 12, // Opcional: ajustar el relleno
+    backgroundColor: '#1e9d55',
+    borderRadius: 20,
+    marginHorizontal: 16,
+    padding: 12,
   },
   moodButton: {
-    backgroundColor: '#ffffff', // Fondo blanco
+    backgroundColor: '#ffffff',
     padding: 12,
     borderRadius: 20,
-    borderWidth: 1, // Agregar borde
-    borderColor: '#dfe6e9', // Color del borde
+    borderWidth: 1,
+    borderColor: '#dfe6e9',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -174,10 +138,6 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   moodEmoji: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 1,
     fontSize: 22,
   },
   widgetContainer: {
@@ -209,10 +169,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   actionIcon: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
     fontSize: 28,
     marginBottom: 2,
   },
@@ -225,42 +181,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#636e72',
     marginTop: 4,
-  },
-  resourceCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#f1f9f5',
-    padding: 12,
-    borderRadius: 15,
-    marginBottom: 12,
-  },
-  resourceIcon: {
-
-    backgroundColor: 'white',
-    padding: 12,
-    borderRadius: 12,
-    marginRight: 12,
-  },
-  resourceEmoji: {
-    fontSize: 20,
-    
-  },
-  resourceInfo: {
-    flex: 1,
-  },
-  resourceType: {
-    fontSize: 12,
-    color: '#636e72',
-    textTransform: 'uppercase',
-  },
-  resourceTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#2d3436',
-  },
-  resourceDuration: {
-    fontSize: 12,
-    color: '#636e72',
   },
   crisisContainer: {
     margin: 16,
