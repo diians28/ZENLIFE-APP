@@ -141,6 +141,10 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   moodEmoji: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 1,
     fontSize: 22,
   },
   widgetContainer: {
