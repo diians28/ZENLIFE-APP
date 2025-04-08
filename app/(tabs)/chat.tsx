@@ -82,7 +82,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   boldText: {
+    fontSize: 14,
     fontWeight: 'bold',
+    color: '#2d3436',
   },
   emergencyBox: {
     backgroundColor: '#ffd3d3',
@@ -111,7 +113,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   footerText: {
-    fontSize: 12,
+    fontSize: 14,
     color: '#636e72',
     textAlign: 'center',
   },
