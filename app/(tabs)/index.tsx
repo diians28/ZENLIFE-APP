@@ -106,6 +106,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   greeting: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingVertical: 10,
     fontSize: 28,
     fontWeight: 'bold',
     color: '#000000',
@@ -162,8 +165,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   actionCard: {
-    backgroundColor: '#f1f9f5',
-    padding: 16,
+        backgroundColor: '#f1f9f5',
+    padding: 15,
     borderRadius: 15,
     width: '48%',
     alignItems: 'center',
