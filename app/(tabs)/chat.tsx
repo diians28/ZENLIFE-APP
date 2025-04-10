@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f8f9fa',
     padding: 16,
+    marginTop: 20, // Agregado para bajar todo el contenido
   },
   header: {
     backgroundColor: '#1e9d55',
