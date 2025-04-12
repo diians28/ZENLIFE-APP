@@ -7,8 +7,8 @@ const MAPPING = {
   'house.fill': 'home',
   'paperplane.fill': 'send',
   'book.fill': 'menu-book',
-  'chevron.left.forwardslash.chevron.right': 'code',
-  'chevron.right': 'chevron-right',
+  'chat.fill': 'chat',
+  
 } as const;
 
 export type IconSymbolName = keyof typeof MAPPING;
