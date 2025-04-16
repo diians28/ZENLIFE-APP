@@ -14,13 +14,20 @@ export default function HomeScreen() {
   ];
 
   const handleMoodSelection = async (mood: typeof moods[0]) => {
-    setSelectedMood(mood.value);
+    if (selectedMood === mood.value) {
+      // Si el mismo emoji ya está seleccionado, deselecciona
+      setSelectedMood(null);
+      setShowFeedback(false);
+    } else {
+      // Si es un emoji diferente, selecciona y muestra feedback
+      setSelectedMood(mood.value);
 
-    // Guardar el estado de ánimo
-    await saveMoodToStorage(mood.value);
+      // Guardar el estado de ánimo
+      await saveMoodToStorage(mood.value);
 
-    // Mostrar feedback
-    setShowFeedback(true);
+      // Mostrar feedback
+      setShowFeedback(true);
+    }
   };
 
   const saveMoodToStorage = async (mood: string) => {
