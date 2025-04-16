@@ -198,24 +198,29 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   featuredResource: {
-    backgroundColor: '#1e9d55',
+    backgroundColor: '#e8f5e9', // Fondo verde claro (igual al del index)
     padding: 16,
-    borderRadius: 8,
+    borderRadius: 12,
     marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
   featuredTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: '#2e7d32', // Verde oscuro para el título
     marginBottom: 8,
   },
   featuredDescription: {
     fontSize: 14,
-    color: '#ffffff',
+    color: '#2e7d32', // Verde intermedio para la descripción
     marginBottom: 16,
   },
   playButton: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#4caf50', // Verde intermedio para el botón
     paddingVertical: 12,
     borderRadius: 8,
     alignItems: 'center',
@@ -223,6 +228,6 @@ const styles = StyleSheet.create({
   playButtonText: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#1e9d55',
+    color: '#ffffff', // Texto blanco para el botón
   },
 });
