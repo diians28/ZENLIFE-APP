@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f0f9f4', // Fondo verde claro (igual que en index.tsx)
     padding: 16,
-    marginTop: 20,
+    marginTop: 1,
   },
   header: {
     backgroundColor: '#a5d6a7', // Verde claro para el encabezado
@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
+    marginTop: 8, // Baja la palabra añadiendo margen superior
   },
   warningBox: {
     backgroundColor: '#ffffff', // Fondo blanco para la caja de advertencias

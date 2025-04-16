@@ -145,13 +145,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f8f9fa',
     padding: 16,
-    marginTop: 40, // Baja todo el contenido
+  
   },
   headerText: {
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#1e9d55',
     marginBottom: 16,
+    marginTop: 16, // Baja la palabra añadiendo margen superior
+    backgroundColor: '#ffffff', // Fondo blanco para el texto
   },
   categoriesContainer: {
     flexDirection: 'row',
