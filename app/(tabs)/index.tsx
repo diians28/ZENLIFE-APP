@@ -1,8 +1,11 @@
+import React, { useState } from 'react';
 import { StyleSheet, ScrollView, Pressable, Image } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
 export default function HomeScreen() {
+  const [selectedMood, setSelectedMood] = useState<string | null>(null);
+
   const moods = [
     { emoji: "😔", label: "Triste" },
     { emoji: "😐", label: "Normal" },
@@ -14,6 +17,11 @@ export default function HomeScreen() {
     { title: "Meditación", icon: "🧘‍♀️", duration: "5 min" },
     { title: "Respiración", icon: "🫁", duration: "3 min" },
   ];
+
+  const handleMoodSelect = (emoji: string) => {
+    setSelectedMood(emoji); // Almacena el emoji seleccionado
+    console.log(`Emoji seleccionado: ${emoji}`); // Puedes usar esto para depuración o almacenamiento
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -36,11 +44,20 @@ export default function HomeScreen() {
 
         <ThemedView style={styles.moodContainer}>
           {moods.map((mood, index) => (
-            <Pressable key={index} style={styles.moodButton}>
+            <Pressable
+              key={index}
+              style={[
+                styles.moodButton,
+                selectedMood === mood.emoji && styles.selectedMoodButton, // Resalta el emoji seleccionado
+              ]}
+              onPress={() => handleMoodSelect(mood.emoji)}
+            >
               <ThemedText style={styles.moodEmoji}>{mood.emoji}</ThemedText>
             </Pressable>
           ))}
         </ThemedView>
+
+       
       </ThemedView>
 
       {/* Quick Actions Widget */}
@@ -147,6 +164,16 @@ const styles = StyleSheet.create({
     padding: 1,
     fontSize: 22,
   },
+  selectedMoodButton: {
+    backgroundColor: '#add8e6',
+  },
+  selectedMoodText: {
+    marginTop: 10,
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#2d3436',
+  },
   widgetContainer: {
     margin: 16,
     padding: 16,
@@ -169,7 +196,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   actionCard: {
-        backgroundColor: '#f1f9f5',
+    backgroundColor: '#f1f9f5',
     padding: 15,
     borderRadius: 15,
     width: '48%',

@@ -1,8 +1,15 @@
 import { StyleSheet, ScrollView, Pressable } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { useRouter } from 'expo-router';
 
 export default function ChatScreen() {
+  const router = useRouter();
+
+  const handleNavigateToChatbot = () => {
+    router.push('/chatbot'); // Navega a la pantalla del chatbot
+  };
+
   return (
     <ScrollView style={styles.container}>
       {/* Header Section */}
@@ -24,10 +31,8 @@ export default function ChatScreen() {
         El chat y los recursos proporcionados son <ThemedText style={styles.boldText}>solo para información y apoyo general.</ThemedText> Si estás experimentando una crisis de salud mental o necesitas ayuda profesional, contacta a un profesional de salud mental calificado o servicios de emergencia.
       </ThemedText>
 
-     
-
       {/* Continue Button */}
-      <Pressable style={styles.continueButton}>
+      <Pressable style={styles.continueButton} onPress={handleNavigateToChatbot}>
         <ThemedText style={styles.continueButtonText}>Entiendo - Continuar al Chat</ThemedText>
       </Pressable>
 
