@@ -71,18 +71,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 20,
-    backgroundColor: '#eafaf1',
+    paddingVertical: 15, // Aumentado para mover el logo y texto más abajo
+    backgroundColor: '#f0f9f4',
     borderBottomWidth: 1,
     borderColor: '#d4d4d4',
   },
   headerIcon: {
-    width: 30,
-    height: 30,
-    marginRight: 10,
+    width: 60, // Aumentado para hacer el logo más grande
+    height: 60, // Aumentado para hacer el logo más grande
+    marginRight: 15,
   },
   headerText: {
-    fontSize: 20,
+    fontSize: 28, // Aumentado para hacer el texto más grande
     fontWeight: 'bold',
     color: '#1e9d55',
   },
