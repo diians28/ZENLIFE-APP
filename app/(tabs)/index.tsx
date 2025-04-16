@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#c8e6c9', // Verde claro para feedback positivo
     padding: 16,
     borderRadius: 12,
-    marginVertical: 16,
+    marginVertical: 8, // Reducido para subir el feedback (Fantástico)
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -289,7 +289,8 @@ const styles = StyleSheet.create({
     color: '#2e7d32',
   },
   crisisContainer: {
-    marginTop: 24,
+    marginTop: 5, // Reducido para subir el apartado de crisis
+    marginBottom: 16, // Agregado para mostrar el fondo verde debajo
     padding: 16,
   },
   crisisBox: {
