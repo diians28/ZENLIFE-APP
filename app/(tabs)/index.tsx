@@ -146,7 +146,7 @@ export default function HomeScreen() {
           {getMoodRecommendations(selectedMood).map((rec, index) => (
             <View key={index} style={styles.recommendationCard}>
               <Text style={styles.recommendationTitle}>{rec.title}</Text>
-              <Text style={styles.recommendationDuration}>{rec.duration}</Text>
+              
             </View>
           ))}
         </View>
