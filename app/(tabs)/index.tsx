@@ -50,23 +50,23 @@ export default function HomeScreen() {
     switch (mood) {
       case "sad":
         return [
-          { title: "Meditación para momentos difíciles", duration: "5 minutos" },
-          { title: "Ejercicios de respiración", duration: "3 minutos" },
-          { title: "Música relajante", duration: "15 minutos" },
-          { title: "Contactar a un amigo", duration: "Ahora" },
+          { title: "🌿 Meditación para momentos difíciles", duration: "5 minutos" },
+          { title: "🌬️ Ejercicios de respiración", duration: "3 minutos" },
+          { title: "🎵 Música relajante", duration: "15 minutos" },
+          { title: "🤝 Contactar a un amigo", duration: "Ahora" },
         ];
       case "neutral":
         return [
-          { title: "Caminata consciente", duration: "10 minutos" },
-          { title: "Ejercicio de gratitud", duration: "5 minutos" },
-          { title: "Meditación de atención plena", duration: "7 minutos" },
+          { title: "🚶 Caminata consciente", duration: "10 minutos" },
+          { title: "🙏 Ejercicio de gratitud", duration: "5 minutos" },
+          { title: "🧘 Meditación de atención plena", duration: "7 minutos" },
         ];
       case "good":
       case "happy":
         return [
-          { title: "Meditación de alegría", duration: "5 minutos" },
-          { title: "Registro de momentos positivos", duration: "3 minutos" },
-          { title: "Compartir tu bienestar", duration: "Ahora" },
+          { title: "🌞 Meditación de alegría", duration: "5 minutos" },
+          { title: "📖 Registro de momentos positivos", duration: "3 minutos" },
+          { title: "💌 Compartir tu bienestar", duration: "Ahora" },
         ];
       default:
         return [];
@@ -142,8 +142,9 @@ export default function HomeScreen() {
           <Text style={styles.recommendationsTitle}>Recomendado para ti hoy:</Text>
           {getMoodRecommendations(selectedMood).map((rec, index) => (
             <View key={index} style={styles.recommendationCard}>
-              <Text style={styles.recommendationTitle}>{rec.title}</Text>
-              
+              <Text style={styles.recommendationTitle}>
+                {rec.title} {/* Eliminado el emoji de la estrella */}
+              </Text>
             </View>
           ))}
         </View>
