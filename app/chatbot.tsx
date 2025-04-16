@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 15, // Aumentado para mover el logo y texto más abajo
-    backgroundColor: '#f0f9f4',
+    backgroundColor: '#e8f5e9',
     borderBottomWidth: 1,
     borderColor: '#d4d4d4',
   },
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
   userMessage: {
     alignSelf: 'flex-end',
-    backgroundColor: '#d4f8e8', // Verde claro
+    backgroundColor: '#e8f5e9', // Verde claro
     padding: 10,
     borderRadius: 10,
     maxWidth: '80%',

@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     color: '#1e9d55',
     marginBottom: 16,
     marginTop: 16, // Baja la palabra añadiendo margen superior
-    backgroundColor: '#ffffff', // Fondo blanco para el texto
+    backgroundColor: 'transparent', // Fondo blanco para el texto
   },
   categoriesContainer: {
     flexDirection: 'row',
