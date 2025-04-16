@@ -1,87 +1,167 @@
 import React, { useState } from 'react';
-import { StyleSheet, ScrollView, Pressable, Image } from 'react-native';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { StyleSheet, ScrollView, Pressable, Text, View, Image } from 'react-native';
+import { MotiView, AnimatePresence } from 'moti';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function HomeScreen() {
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
+  const [showFeedback, setShowFeedback] = useState(false);
 
   const moods = [
-    { emoji: "😔", label: "Triste" },
-    { emoji: "😐", label: "Normal" },
-    { emoji: "😊", label: "Bien" },
-    { emoji: "😃", label: "Excelente" }
+    { emoji: "🙂", value: "good", label: "Bien" },
+    { emoji: "😊", value: "happy", label: "Feliz" },
+    { emoji: "😔", value: "sad", label: "Triste" },
   ];
 
-  const quickActions = [
-    { title: "Meditación", icon: "🧘‍♀️", duration: "5 min" },
-    { title: "Respiración", icon: "🫁", duration: "3 min" },
-  ];
+  const handleMoodSelection = async (mood: typeof moods[0]) => {
+    setSelectedMood(mood.value);
 
-  const handleMoodSelect = (emoji: string) => {
-    setSelectedMood(emoji); // Almacena el emoji seleccionado
-    console.log(`Emoji seleccionado: ${emoji}`); // Puedes usar esto para depuración o almacenamiento
+    // Guardar el estado de ánimo
+    await saveMoodToStorage(mood.value);
+
+    // Mostrar feedback
+    setShowFeedback(true);
+
+    // Ocultar el feedback después de 3 segundos
+    setTimeout(() => {
+      setShowFeedback(false);
+    }, 3000);
+
+    // Mostrar recomendaciones
+    setTimeout(() => {
+      setSelectedMood(null); // Ocultar las recomendaciones después de 3 segundos
+    }, 3000);
+  };
+
+  const saveMoodToStorage = async (mood: string) => {
+    try {
+      const today = new Date().toISOString().split("T")[0]; // Formato YYYY-MM-DD
+      const storedData = await AsyncStorage.getItem("moodHistory");
+      const moodHistory = storedData ? JSON.parse(storedData) : {};
+
+      // Guardar el estado de ánimo de hoy
+      moodHistory[today] = mood;
+
+      // Guardar en AsyncStorage
+      await AsyncStorage.setItem("moodHistory", JSON.stringify(moodHistory));
+    } catch (error) {
+      console.error("Error al guardar el estado de ánimo:", error);
+    }
+  };
+
+  const getMoodRecommendations = (mood: string) => {
+    switch (mood) {
+      case "sad":
+        return [
+          { title: "Meditación para momentos difíciles", duration: "5 minutos" },
+          { title: "Ejercicios de respiración", duration: "3 minutos" },
+          { title: "Música relajante", duration: "15 minutos" },
+          { title: "Contactar a un amigo", duration: "Ahora" },
+        ];
+      case "neutral":
+        return [
+          { title: "Caminata consciente", duration: "10 minutos" },
+          { title: "Ejercicio de gratitud", duration: "5 minutos" },
+          { title: "Meditación de atención plena", duration: "7 minutos" },
+        ];
+      case "good":
+      case "happy":
+        return [
+          { title: "Meditación de alegría", duration: "5 minutos" },
+          { title: "Registro de momentos positivos", duration: "3 minutos" },
+          { title: "Compartir tu bienestar", duration: "Ahora" },
+        ];
+      default:
+        return [];
+    }
   };
 
   return (
     <ScrollView style={styles.container}>
+      {/* Logo and Header */}
+      <View style={styles.logoContainer}>
+        <Image
+          source={require('@/assets/images/zenlife-logo.png')} // Cambia la ruta según tu proyecto
+          style={styles.logo}
+        />
+        <Text style={styles.appName}>ZENLIFE</Text>
+      </View>
+
       {/* Header Section */}
-      <ThemedView style={styles.headerSection}>
-        <ThemedView style={styles.logoContainer}>
-          <Image
-            source={require('@/assets/images/zenlife-logo.png')}
-            style={styles.logo}
-          />
-          <ThemedText style={styles.appName}>ZENLIFE</ThemedText>
-        </ThemedView>
-        
-        <ThemedView style={styles.header}>
-          <ThemedView>
-            <ThemedText style={[styles.greeting]}>¡Bienvenido de nuevo!</ThemedText>
-            <ThemedText style={[styles.welcomeText]}>¿Cómo te sientes hoy?</ThemedText>
-          </ThemedView>
-        </ThemedView>
+      <View style={styles.headerSection}>
+        <Text style={styles.greeting}>¡Bienvenido de nuevo!</Text>
+        <Text style={styles.welcomeText}>¿Cómo te sientes hoy?</Text>
 
-        <ThemedView style={styles.moodContainer}>
+        {/* Mood Selection */}
+        <View style={styles.moodContainer}>
           {moods.map((mood, index) => (
-            <Pressable
+            <MotiView
               key={index}
-              style={[
-                styles.moodButton,
-                selectedMood === mood.emoji && styles.selectedMoodButton, // Resalta el emoji seleccionado
-              ]}
-              onPress={() => handleMoodSelect(mood.emoji)}
+              from={{ opacity: 0, translateY: 20 }}
+              animate={{ opacity: 1, translateY: 0 }}
+              transition={{ delay: index * 0.1 }}
             >
-              <ThemedText style={styles.moodEmoji}>{mood.emoji}</ThemedText>
-            </Pressable>
+              <Pressable
+                style={[
+                  styles.moodButton,
+                  selectedMood === mood.value && styles.selectedMoodButton,
+                ]}
+                onPress={() => handleMoodSelection(mood)}
+              >
+                <Text style={styles.moodEmoji}>{mood.emoji}</Text>
+                <Text style={styles.moodLabel}>{mood.label}</Text>
+              </Pressable>
+            </MotiView>
           ))}
-        </ThemedView>
+        </View>
+      </View>
 
-       
-      </ThemedView>
+      {/* Feedback */}
+      <AnimatePresence>
+        {showFeedback && (
+          <MotiView
+            from={{ opacity: 0, translateY: 10 }}
+            animate={{ opacity: 1, translateY: 0 }}
+            exit={{ opacity: 0 }}
+            style={styles.feedbackBox}
+          >
+            <Text style={styles.feedbackText}>
+              {selectedMood === "sad" &&
+                "Lamento que no te sientas bien. ¿Quieres explorar algunos recursos que podrían ayudarte?"}
+              {selectedMood === "neutral" &&
+                "Gracias por compartir. Hay actividades que podrían mejorar tu día."}
+              {selectedMood === "good" &&
+                "¡Me alegra que te sientas bien! Mantén ese estado con algunas actividades."}
+              {selectedMood === "happy" &&
+                "¡Fantástico! Es genial verte tan feliz hoy."}
+            </Text>
+          </MotiView>
+        )}
+      </AnimatePresence>
 
-      {/* Quick Actions Widget */}
-      <ThemedView style={styles.widgetContainer}>
-        <ThemedText style={styles.widgetTitle}>Actividades sugeridas</ThemedText>
-        <ThemedView style={styles.quickActionsGrid}>
-          {quickActions.map((action, index) => (
-            <Pressable key={index} style={styles.actionCard}>
-              <ThemedText style={styles.actionIcon}>{action.icon}</ThemedText>
-              <ThemedText style={styles.actionTitle}>{action.title}</ThemedText>
-              <ThemedText style={styles.actionDuration}>{action.duration}</ThemedText>
-            </Pressable>
+      {/* Recommendations */}
+      {selectedMood && (
+        <View style={styles.recommendationsContainer}>
+          <Text style={styles.recommendationsTitle}>Recomendado para ti hoy:</Text>
+          {getMoodRecommendations(selectedMood).map((rec, index) => (
+            <View key={index} style={styles.recommendationCard}>
+              <Text style={styles.recommendationTitle}>{rec.title}</Text>
+              <Text style={styles.recommendationDuration}>{rec.duration}</Text>
+            </View>
           ))}
-        </ThemedView>
-      </ThemedView>
+        </View>
+      )}
 
       {/* Crisis Help */}
       <Pressable style={styles.crisisContainer}>
-        <ThemedView style={styles.crisisBox}>
-          <ThemedText>
-            <ThemedText style={styles.crisisText}>⚠︎Línea de Crisis </ThemedText>
-            <ThemedText style={styles.crisisText2}> - Si necesitas ayuda inmediata, llama al 988 - Línea Nacional de Prevención del Suicidio</ThemedText>
-          </ThemedText>
-        </ThemedView>
+        <View style={styles.crisisBox}>
+          <Text>
+            <Text style={styles.crisisText}>⚠︎ Línea de Crisis </Text>
+            <Text style={styles.crisisText2}>
+              - Si necesitas ayuda inmediata, llama al 988 - Línea Nacional de Prevención del Suicidio
+            </Text>
+          </Text>
+        </View>
       </Pressable>
     </ScrollView>
   );
@@ -90,155 +170,158 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
-  },
-  headerSection: {
-    backgroundColor: 'rgba(26, 171, 92, 0.1)',
-    padding: 20,
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-    paddingTop: 40,
+    backgroundColor: '#f0f9f4', // Fondo verde claro y relajante
+    padding: 16,
   },
   logoContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
+    marginTop: 24, // Margen superior para bajar el logo y el texto
+    marginBottom: 32, // Margen adicional entre el logo y el texto
   },
   logo: {
     width: 60,
     height: 60,
-    marginRight: 8,
+    marginRight: 12,
   },
   appName: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#1e9d55',
-    letterSpacing: 1,
-    backgroundColor: 'transparent',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  greeting: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingVertical: 10,
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#000000',
-    backgroundColor: 'transparent',
+    color: '#2e7d32', // Verde oscuro para el texto principal
+    letterSpacing: 1,
   },
-  welcomeText: {
-    fontSize: 16,
-    color: '#000000',
-    backgroundColor: 'transparent',
-  },
-  moodContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingVertical: 10,
-    backgroundColor: '#1e9d55',
-    borderRadius: 20,
-    marginHorizontal: 16,
-    padding: 12,
-  },
-  moodButton: {
-    backgroundColor: '#ffffff',
-    padding: 12,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: '#dfe6e9',
+  headerSection: {
+    marginBottom: 24,
+    padding: 16,
+    backgroundColor: '#e8f5e9', // Verde claro para destacar
+    borderRadius: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
   },
-  moodEmoji: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 1,
-    fontSize: 22,
-  },
-  selectedMoodButton: {
-    backgroundColor: '#add8e6',
-  },
-  selectedMoodText: {
-    marginTop: 10,
-    fontSize: 18,
+  greeting: {
+    fontSize: 24,
     fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#2d3436',
+    color: '#2e7d32',
+    marginBottom: 8,
   },
-  widgetContainer: {
-    margin: 16,
-    padding: 16,
-    backgroundColor: 'white',
-    borderRadius: 20,
+  welcomeText: {
+    fontSize: 16,
+    color: '#4caf50', // Verde medio para el subtítulo
+  },
+  moodContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 16,
+    paddingVertical: 16,
+    backgroundColor: '#ffffff',
+    borderRadius: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
+    shadowRadius: 4,
+    elevation: 2,
   },
-  widgetTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 16,
-    color: '#2d3436',
-  },
-  quickActionsGrid: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  actionCard: {
-    backgroundColor: '#f1f9f5',
-    padding: 15,
-    borderRadius: 15,
-    width: '48%',
+  moodButton: {
+    backgroundColor: '#e8f5e9',
+    padding: 16,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#c8e6c9',
     alignItems: 'center',
-  },
-  actionIcon: {
-    flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-    fontSize: 28,
-    marginBottom: 2,
+    width: 70,
+    height: 70,
   },
-  actionTitle: {
+  selectedMoodButton: {
+    backgroundColor: '#a5d6a7',
+    borderColor: '#2e7d32',
+  },
+  moodEmoji: {
+    fontSize: 28,
+  },
+  moodLabel: {
+    fontSize: 12,
+    color: '#4caf50',
+    marginTop: 4,
+    textAlign: 'center',
+  },
+  feedbackBox: {
+    backgroundColor: '#c8e6c9', // Verde claro para feedback positivo
+    padding: 16,
+    borderRadius: 12,
+    marginVertical: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  feedbackText: {
+    textAlign: 'center',
+    color: '#2e7d32', // Verde oscuro para texto positivo
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  recommendationsContainer: {
+    marginTop: 20,
+    padding: 16,
+    backgroundColor: '#ffffff',
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  recommendationsTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 12,
+    color: '#2e7d32',
+  },
+  recommendationCard: {
+    marginBottom: 12,
+    padding: 16,
+    backgroundColor: '#e8f5e9',
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  recommendationTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#2d3436',
-  },
-  actionDuration: {
-    fontSize: 12,
-    color: '#636e72',
-    marginTop: 4,
+    color: '#2e7d32',
   },
   crisisContainer: {
-    margin: 16,
-    marginBottom: 32,
+    marginTop: 24,
+    padding: 16,
   },
   crisisBox: {
-    backgroundColor: '#ffd3d3',
+    backgroundColor: '#ffcdd2', // Rojo claro para destacar la importancia
     padding: 16,
-    borderRadius: 15,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
   crisisText: {
     textAlign: 'center',
-    color: '#ff0000',
+    color: '#d32f2f', // Rojo oscuro para el texto
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: 'bold',
   },
   crisisText2: {
     textAlign: 'center',
     color: '#000000',
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 14,
+    marginTop: 4,
   },
 });
