@@ -21,16 +21,6 @@ export default function HomeScreen() {
 
     // Mostrar feedback
     setShowFeedback(true);
-
-    // Ocultar el feedback después de 3 segundos
-    setTimeout(() => {
-      setShowFeedback(false);
-    }, 3000);
-
-    // Mostrar recomendaciones
-    setTimeout(() => {
-      setSelectedMood(null); // Ocultar las recomendaciones después de 3 segundos
-    }, 3000);
   };
 
   const saveMoodToStorage = async (mood: string) => {
