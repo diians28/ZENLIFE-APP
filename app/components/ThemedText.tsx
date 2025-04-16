@@ -7,7 +7,7 @@ type ThemedTextProps = TextProps & {
 };
 
 export function ThemedText({ type = 'default', style, ...rest }: ThemedTextProps) {
-  const color = useThemeColor('text');
+  const color = useThemeColor({}, 'text');
 
   return (
     <Text
@@ -48,3 +48,5 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
 });
+
+export default ThemedText;

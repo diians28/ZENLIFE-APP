@@ -9,7 +9,7 @@ export default function ChatbotScreen() {
     if (input.trim() === '') return;
 
     // Agrega el mensaje del usuario
-    const userMessage = { id: Date.now().toString(), text: input, sender: 'user' };
+    const userMessage: { id: string; text: string; sender: 'user' | 'bot' } = { id: Date.now().toString(), text: input, sender: 'user' };
     setMessages((prev) => [...prev, userMessage]);
 
     // Respuesta del chatbot (puedes personalizar esta lógica)
