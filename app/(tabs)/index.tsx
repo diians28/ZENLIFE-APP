@@ -11,7 +11,7 @@ export default function HomeScreen() {
     { emoji: "😊", value: "happy", label: "Feliz" }, // Ahora está antes que "Bien"
     { emoji: "🙂", value: "good", label: "Bien" },
     { emoji: "😔", value: "sad", label: "Triste" },
-    { emoji: "😰", value: "stressed", label: "Estresado" },
+    { emoji: "😰", value: "stressed", label: "Tenso" },
   ];
 
   const handleMoodSelection = async (mood: typeof moods[0]) => {
