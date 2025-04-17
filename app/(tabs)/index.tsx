@@ -8,10 +8,10 @@ export default function HomeScreen() {
   const [showFeedback, setShowFeedback] = useState(false);
 
   const moods = [
+    { emoji: "😊", value: "happy", label: "Feliz" }, // Ahora está antes que "Bien"
     { emoji: "🙂", value: "good", label: "Bien" },
-    { emoji: "😊", value: "happy", label: "Feliz" },
     { emoji: "😔", value: "sad", label: "Triste" },
-    { emoji: "😰", value: "stressed", label: "Estresado" }, // Nuevo estado
+    { emoji: "😰", value: "stressed", label: "Estresado" },
   ];
 
   const handleMoodSelection = async (mood: typeof moods[0]) => {
