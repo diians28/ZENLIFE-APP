@@ -219,9 +219,11 @@ const styles = StyleSheet.create({
   },
   moodContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: 16,
-    paddingVertical: 16,
+    flexWrap: 'wrap', // Permite que los botones se distribuyan en varias filas
+    justifyContent: 'center', // Centra los botones horizontalmente
+    alignItems: 'center', // Centra los botones verticalmente
+    marginTop: 12, // Reducido para hacer el contenedor más compacto
+    paddingVertical: 8, // Reducido para disminuir el espacio interno
     backgroundColor: '#ffffff',
     borderRadius: 12,
     shadowColor: '#000',
@@ -232,24 +234,25 @@ const styles = StyleSheet.create({
   },
   moodButton: {
     backgroundColor: '#e8f5e9',
-    padding: 16,
-    borderRadius: 20,
+    padding: 12, // Reducido para hacer los botones más pequeños
+    borderRadius: 16, // Ajustado para mantener proporción
     borderWidth: 1,
     borderColor: '#c8e6c9',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 70,
-    height: 70,
+    width: 60, // Reducido para hacer los botones más pequeños
+    height: 60, // Reducido para hacer los botones más pequeños
+    margin: 6, // Espacio entre botones ajustado
   },
   selectedMoodButton: {
     backgroundColor: '#a5d6a7',
     borderColor: '#2e7d32',
   },
   moodEmoji: {
-    fontSize: 28,
+    fontSize: 24, // Reducido para que el emoji se ajuste al botón más pequeño
   },
   moodLabel: {
-    fontSize: 12,
+    fontSize: 10, // Reducido para que el texto se ajuste al botón más pequeño
     color: '#4caf50',
     marginTop: 4,
     textAlign: 'center',
