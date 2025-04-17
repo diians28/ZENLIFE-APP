@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#1e9d55',
+    color: '#2e7d32',
     marginBottom: 16,
     marginTop: 16, // Baja la palabra añadiendo margen superior
     backgroundColor: 'transparent', // Fondo blanco para el texto
