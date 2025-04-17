@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, ScrollView, Pressable, Text, View, Image } from 'react-native';
+import { StyleSheet, ScrollView, Pressable, Text, View, Image, Linking } from 'react-native';
 import { MotiView, AnimatePresence } from 'moti';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -167,6 +167,13 @@ export default function HomeScreen() {
               - Si necesitas ayuda inmediata, llama al 988 - Línea Nacional de Prevención del Suicidio
             </Text>
           </Text>
+          {/* Botón para llamar */}
+          <Pressable
+            style={styles.callButton}
+            onPress={() => Linking.openURL('tel:988')} // Redirige a la app del teléfono
+          >
+            <Text style={styles.callButtonText}>Llamar</Text>
+          </Pressable>
         </View>
       </Pressable>
     </ScrollView>
@@ -313,7 +320,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   crisisBox: {
-    backgroundColor: '#ffcdd2', // Rojo claro para destacar la importancia
+     backgroundColor: '#ffcdd2', // Rojo claro para destacar la importancia
     padding: 16,
     borderRadius: 12,
     shadowColor: '#000',
@@ -333,5 +340,18 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 14,
     marginTop: 4,
+  },
+  callButton: {
+    marginTop: 12,
+    backgroundColor: '#d32f2f', // Rojo oscuro para destacar
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  callButtonText: {
+    color: '#ffffff', // Texto blanco para contraste
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
