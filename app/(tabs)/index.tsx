@@ -11,6 +11,7 @@ export default function HomeScreen() {
     { emoji: "🙂", value: "good", label: "Bien" },
     { emoji: "😊", value: "happy", label: "Feliz" },
     { emoji: "😔", value: "sad", label: "Triste" },
+    { emoji: "😰", value: "stressed", label: "Estresado" }, // Nuevo estado
   ];
 
   const handleMoodSelection = async (mood: typeof moods[0]) => {
@@ -55,18 +56,25 @@ export default function HomeScreen() {
           { title: "🎵 Música relajante", duration: "15 minutos" },
           { title: "🤝 Contactar a un amigo", duration: "Ahora" },
         ];
-      case "neutral":
+      case "good":
         return [
           { title: "🚶 Caminata consciente", duration: "10 minutos" },
           { title: "🙏 Ejercicio de gratitud", duration: "5 minutos" },
           { title: "🧘 Meditación de atención plena", duration: "7 minutos" },
         ];
-      case "good":
+     
       case "happy":
         return [
           { title: "🌞 Meditación de alegría", duration: "5 minutos" },
           { title: "📖 Registro de momentos positivos", duration: "3 minutos" },
           { title: "💌 Compartir tu bienestar", duration: "Ahora" },
+        ];
+      case "stressed":
+        return [
+          { title: "🛑 Pausa consciente: respira profundamente", duration: "2 minutos" },
+          { title: "🧖 Relájate con un baño caliente", duration: "15 minutos" },
+          { title: "📚 Lee algo inspirador", duration: "10 minutos" },
+          { title: "🌳 Sal a caminar y conecta con la naturaleza", duration: "20 minutos" },
         ];
       default:
         return [];
@@ -125,12 +133,12 @@ export default function HomeScreen() {
             <Text style={styles.feedbackText}>
               {selectedMood === "sad" &&
                 "Lamento que no te sientas bien. ¿Quieres explorar algunos recursos que podrían ayudarte?"}
-              {selectedMood === "neutral" &&
-                "Gracias por compartir. Hay actividades que podrían mejorar tu día."}
               {selectedMood === "good" &&
                 "¡Me alegra que te sientas bien! Mantén ese estado con algunas actividades."}
               {selectedMood === "happy" &&
                 "¡Fantástico! Es genial verte tan feliz hoy."}
+              {selectedMood === "stressed" &&
+                "Parece que estás estresado. Tómate un momento para relajarte con estas actividades."}
             </Text>
           </MotiView>
         )}
