@@ -46,40 +46,45 @@ export default function HomeScreen() {
       console.error("Error al guardar el estado de ánimo:", error);
     }
   };
+// 👇 Sigue igual todo hasta getMoodRecommendations
+const getMoodRecommendations = (mood: string) => {
+  switch (mood) {
+    case "sad":
+      return [
+        { title: "🌿 Meditación para momentos difíciles", duration: "5 minutos", url: "https://www.youtube.com/watch?v=inpok4MKVLM" },
+        { title: "🌬️ Ejercicios de respiración", duration: "3 minutos", url: "https://www.youtube.com/watch?v=86HUcX8ZtAk" },
+        { title: "🎵 Música relajante", duration: "15 minutos", url: "https://www.youtube.com/watch?v=2OEL4P1Rz04" },
+        { title: "🤝 Contactar a un amigo", duration: "Ahora", url: "https://www.youtube.com/watch?v=vl7C9q5-zmA" },
+      ];
+    case "good":
+      return [
+        { title: "🚶 Caminata consciente", duration: "10 minutos", url: "https://www.youtube.com/watch?v=Ev6yE55kYGw" },
+        { title: "🙏 Ejercicio de gratitud", duration: "5 minutos", url: "https://www.youtube.com/watch?v=oHv6vTKD6lg" },
+        { title: "🧘 Meditación de atención plena", duration: "7 minutos", url: "https://www.youtube.com/watch?v=ZToicYcHIOU" },
+      ];
+    case "happy":
+      return [
+        { title: "🌞 Meditación de alegría", duration: "5 minutos", url: "https://www.youtube.com/watch?v=Vn8phH0k5HI" },
+        { title: "📖 Registro de momentos positivos", duration: "3 minutos", url: "https://www.youtube.com/watch?v=bG4ap7UrL8Q" },
+        { title: "💌 Compartir tu bienestar", duration: "Ahora", url: "https://www.youtube.com/watch?v=UpxL0f3LdG8" },
+      ];
+    case "stressed":
+      return [
+        { title: "🛑 Pausa consciente: respira profundamente", duration: "2 minutos", url: "https://www.youtube.com/watch?v=MIr3RsUWrdo" },
+        { title: "🧖 Relájate con un baño caliente", duration: "15 minutos", url: "https://www.youtube.com/watch?v=92i5m3tV5XY" },
+        { title: "📚 Lee algo inspirador", duration: "10 minutos", url: "https://www.youtube.com/watch?v=BZbChKzedEk" },
+        { title: "🌳 Sal a caminar y conecta con la naturaleza", duration: "20 minutos", url: "https://www.youtube.com/watch?v=w0oM7A8f3Yk" },
+      ];
+    default:
+      return [];
+  }
+};
 
-  const getMoodRecommendations = (mood: string) => {
-    switch (mood) {
-      case "sad":
-        return [
-          { title: "🌿 Meditación para momentos difíciles", duration: "5 minutos" },
-          { title: "🌬️ Ejercicios de respiración", duration: "3 minutos" },
-          { title: "🎵 Música relajante", duration: "15 minutos" },
-          { title: "🤝 Contactar a un amigo", duration: "Ahora" },
-        ];
-      case "good":
-        return [
-          { title: "🚶 Caminata consciente", duration: "10 minutos" },
-          { title: "🙏 Ejercicio de gratitud", duration: "5 minutos" },
-          { title: "🧘 Meditación de atención plena", duration: "7 minutos" },
-        ];
-     
-      case "happy":
-        return [
-          { title: "🌞 Meditación de alegría", duration: "5 minutos" },
-          { title: "📖 Registro de momentos positivos", duration: "3 minutos" },
-          { title: "💌 Compartir tu bienestar", duration: "Ahora" },
-        ];
-      case "stressed":
-        return [
-          { title: "🛑 Pausa consciente: respira profundamente", duration: "2 minutos" },
-          { title: "🧖 Relájate con un baño caliente", duration: "15 minutos" },
-          { title: "📚 Lee algo inspirador", duration: "10 minutos" },
-          { title: "🌳 Sal a caminar y conecta con la naturaleza", duration: "20 minutos" },
-        ];
-      default:
-        return [];
-    }
-  };
+// 👇 NUEVA FUNCIÓN para manejar clics en recomendaciones
+const handleRecommendationPress = (url: string) => {
+  Linking.openURL(url);
+};
+
 
   return (
     <ScrollView style={styles.container}>
@@ -149,13 +154,14 @@ export default function HomeScreen() {
         <View style={styles.recommendationsContainer}>
           <Text style={styles.recommendationsTitle}>Recomendado para ti hoy:</Text>
           {getMoodRecommendations(selectedMood).map((rec, index) => (
-            <View key={index} style={styles.recommendationCard}>
+             <Pressable key={index} style={styles.recommendationCard}  onPress={() => handleRecommendationPress(rec.url)}
+             >
               <Text style={styles.recommendationTitle}>
-                {rec.title} {/* Eliminado el emoji de la estrella */}
-              </Text>
-            </View>
+                {rec.title}</Text> 
+                <Text style={{ color: '#555' }}>{rec.duration}</Text>
+                </Pressable>
           ))}
-        </View>
+          </View>
       )}
 
       {/* Crisis Help */}
@@ -320,7 +326,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   crisisBox: {
-     backgroundColor: '#ffcdd2', // Rojo claro para destacar la importancia
+     backgroundColor: '#ffe5e5', // Rojo claro para destacar la importancia
     padding: 16,
     borderRadius: 12,
     shadowColor: '#000',
@@ -343,14 +349,19 @@ const styles = StyleSheet.create({
   },
   callButton: {
     marginTop: 12,
-    backgroundColor: '#d32f2f', // Rojo oscuro para destacar
+    backgroundColor: '#f8bdbd', // Rojo claro cálido para suavizar el diseño
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2, // Sombra para que el botón resalte ligeramente
   },
   callButtonText: {
-    color: '#ffffff', // Texto blanco para contraste
+    color: '#b71c1c', // Rojo oscuro cálido para el texto
     fontSize: 16,
     fontWeight: 'bold',
   },
