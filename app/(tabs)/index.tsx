@@ -9,7 +9,7 @@ export default function HomeScreen() {
 
   const moods = [
     { emoji: "😊", value: "happy", label: "Feliz" }, // Ahora está antes que "Bien"
-    { emoji: "🙂", value: "good", label: "Bien" },
+    { emoji: "🙂", value: "angry", label: "Enojado" },
     { emoji: "😔", value: "sad", label: "Triste" },
     { emoji: "😰", value: "stressed", label: "Tenso" },
   ];
@@ -46,28 +46,31 @@ export default function HomeScreen() {
       console.error("Error al guardar el estado de ánimo:", error);
     }
   };
-// 👇 Sigue igual todo hasta getMoodRecommendations
-const getMoodRecommendations = (mood: string) => {
-  switch (mood) {
-    case "sad":
-      return [
-        { title: "🌿 Meditación para momentos difíciles", duration: "5 minutos", url: "https://www.youtube.com/watch?v=inpok4MKVLM" },
-        { title: "🌬️ Ejercicios de respiración", duration: "3 minutos", url: "https://www.youtube.com/watch?v=86HUcX8ZtAk" },
-        { title: "🎵 Música relajante", duration: "15 minutos", url: "https://www.youtube.com/watch?v=2OEL4P1Rz04" },
-        { title: "🤝 Contactar a un amigo", duration: "Ahora", url: "https://www.youtube.com/watch?v=vl7C9q5-zmA" },
-      ];
-    case "good":
-      return [
-        { title: "🚶 Caminata consciente", duration: "10 minutos", url: "https://www.youtube.com/watch?v=Ev6yE55kYGw" },
-        { title: "🙏 Ejercicio de gratitud", duration: "5 minutos", url: "https://www.youtube.com/watch?v=oHv6vTKD6lg" },
-        { title: "🧘 Meditación de atención plena", duration: "7 minutos", url: "https://www.youtube.com/watch?v=ZToicYcHIOU" },
-      ];
-    case "happy":
-      return [
-        { title: "🌞 Meditación de alegría", duration: "5 minutos", url: "https://www.youtube.com/watch?v=Vn8phH0k5HI" },
-        { title: "📖 Registro de momentos positivos", duration: "3 minutos", url: "https://www.youtube.com/watch?v=bG4ap7UrL8Q" },
-        { title: "💌 Compartir tu bienestar", duration: "Ahora", url: "https://www.youtube.com/watch?v=UpxL0f3LdG8" },
-      ];
+  const getMoodRecommendations = (mood: string) => {
+    switch (mood) {
+      case "sad":
+        return [
+          { title: "🌿 Meditación para momentos difíciles", duration: "5 minutos", url: "https://www.youtube.com/watch?v=inpok4MKVLM" },
+          { title: "🌬️ Ejercicios de respiración", duration: "3 minutos", url: "https://www.youtube.com/watch?v=86HUcX8ZtAk" },
+          { title: "🎵 Música relajante", duration: "15 minutos", url: "https://youtu.be/pMMpl-fqogE?si=QJlO-iF4sVSrjwNN" },
+          { title: "🤝 Contactar a un amigo", duration: "Ahora", url: "https://wa.me/?text=Hola,%20necesito%20hablar%20sobre%20algo" }, 
+        ];
+    
+      case "angry":
+        return [
+          { title: "💥 Liberación de ira", duration: "10 minutos", url: "https://www.youtube.com/watch?v=Ev6yE55kYGw" },
+          { title: "🔥 Respiración controlada", duration: "5 minutos", url: "https://www.youtube.com/watch?v=oHv6vTKD6lg" },
+          { title: "🌬️ Relajación profunda", duration: "7 minutos", url: "https://www.youtube.com/watch?v=ZToicYcHIOU" },
+        ];
+      
+        case "happy":
+          return [
+            { title: "🌞 Meditación de alegría (video)", duration: "10 minutos", url: "https://youtu.be/Bu0vbWII_jM?si=UKHHDtetlPpIQg_A" },
+            { title: "📖 Registro de momentos positivos", duration: "3 minutos", url: "/registro-positivos" },
+            { title: "💌 Compartir tu bienestar", duration: "Ahora", url: "/compartir-bienestar" },
+          ];
+        
+     
     case "stressed":
       return [
         { title: "🛑 Pausa consciente: respira profundamente", duration: "2 minutos", url: "https://www.youtube.com/watch?v=MIr3RsUWrdo" },
@@ -138,8 +141,9 @@ const handleRecommendationPress = (url: string) => {
             <Text style={styles.feedbackText}>
               {selectedMood === "sad" &&
                 "Lamento que no te sientas bien. ¿Quieres explorar algunos recursos que podrían ayudarte?"}
-              {selectedMood === "good" &&
-                "¡Me alegra que te sientas bien! Mantén ese estado con algunas actividades."}
+              {selectedMood === "angry" && 
+                "Entiendo que estés enojado. Aquí tienes algunas actividades para liberar esa tensión y calmarte."}
+
               {selectedMood === "happy" &&
                 "¡Fantástico! Es genial verte tan feliz hoy."}
               {selectedMood === "stressed" &&
