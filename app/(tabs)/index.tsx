@@ -50,33 +50,33 @@ export default function HomeScreen() {
     switch (mood) {
       case "sad":
         return [
-          { title: "🌿 Meditación para momentos difíciles", duration: "5 minutos", url: "https://www.youtube.com/watch?v=inpok4MKVLM" },
-          { title: "🌬️ Ejercicios de respiración", duration: "3 minutos", url: "https://www.youtube.com/watch?v=86HUcX8ZtAk" },
-          { title: "🎵 Música relajante", duration: "15 minutos", url: "https://youtu.be/pMMpl-fqogE?si=QJlO-iF4sVSrjwNN" },
-          { title: "🤝 Contactar a un amigo", duration: "Ahora", url: "https://wa.me/?text=Hola,%20necesito%20hablar%20sobre%20algo" }, 
+          { title: "🚶 Sal a caminar", duration: "20 minutos", url: "" },
+          { title: "✨ Realiza algo que te guste", duration: "El tiempo que consideres necesario", url: "" },
+          { title: "🎧 Escucha música ", duration: "15 minutos", url: "https://open.spotify.com/playlist/37i9dQZF1DX3rxVfibe1L0"},
+          { title: "🤝 Contacta a un amigo", duration: "Ahora", url: "https://wa.me/?text=Hola,%20necesito%20hablar%20sobre%20algo" }, 
         ];
     
       case "angry":
         return [
-          { title: "💥 Liberación de ira", duration: "10 minutos", url: "https://www.youtube.com/watch?v=Ev6yE55kYGw" },
-          { title: "🔥 Respiración controlada", duration: "5 minutos", url: "https://www.youtube.com/watch?v=oHv6vTKD6lg" },
-          { title: "🌬️ Relajación profunda", duration: "7 minutos", url: "https://www.youtube.com/watch?v=ZToicYcHIOU" },
+          { title: "🏃‍♀️ Haz ejercicio intenso", duration: "El tiempo que consideres necesario", url: "" },
+          { title: "🔥 Respiración controlada", duration: "15 minutos", url: "https://youtu.be/T3gb5naR5yM?si=FlVcc-Zi-nVUxfO9" },
+          { title: "📵 Desconéctate de las redes", duration: "20 minutos", url: "" },
         ];
       
         case "happy":
           return [
-            { title: "🌞 Meditación de alegría (video)", duration: "10 minutos", url: "https://youtu.be/Bu0vbWII_jM?si=UKHHDtetlPpIQg_A" },
+            { title: "🌸 Haz una actividad que te apasione", duration: "30 minutos", url: "" },
             { title: "📖 Registro de momentos positivos", duration: "3 minutos", url: "/registro-positivos" },
-            { title: "💌 Compartir tu bienestar", duration: "Ahora", url: "/compartir-bienestar" },
+            { title: "🌞 Sal a disfrutar del sol", duration: "15", url: "" },
           ];
         
      
     case "stressed":
       return [
-        { title: "🛑 Pausa consciente: respira profundamente", duration: "2 minutos", url: "https://www.youtube.com/watch?v=MIr3RsUWrdo" },
-        { title: "🧖 Relájate con un baño caliente", duration: "15 minutos", url: "https://www.youtube.com/watch?v=92i5m3tV5XY" },
-        { title: "📚 Lee algo inspirador", duration: "10 minutos", url: "https://www.youtube.com/watch?v=BZbChKzedEk" },
-        { title: "🌳 Sal a caminar y conecta con la naturaleza", duration: "20 minutos", url: "https://www.youtube.com/watch?v=w0oM7A8f3Yk" },
+        { title: "🛑 Meditación profunda", duration: "10 minutos", url: "https://youtu.be/tYwnSBkc_To?si=Uze-iao-eqDU1N8v" },
+        { title: "🧖 Relájate con un baño caliente", duration: "15 minutos", url: "" },
+        { title: "🧘 Haz estiramientos suaves o yoga", duration: "14 minutos", url: "https://youtu.be/4pLUleLdwY4?si=bZ6s3jjEziOPy28C" },
+        { title: "🌳 Sal a caminar y conecta con la naturaleza", duration: "20 minutos", url: "" },
       ];
     default:
       return [];
